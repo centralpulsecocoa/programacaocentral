@@ -11,7 +11,7 @@ import { Shield, AlertCircle, CheckCircle2, Mail, Key, Lock, ArrowRight } from "
 import { toast } from "sonner";
 
 const OFI_LOGO_URL = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6905526da166967415597099/3c8ad4e27_ofi_logo_RGB2.jpg";
-const ADMIN_WHITELIST = ['jjancem@gmail.com', 'dep.central@olam.onmicrosoft.com'];
+const ADMIN_WHITELIST = ['jjancem@gmail.com', 'dep.central@olam.onmicrosoft.com','arthur.machado@ofi.com'];
 
 export default function Access() {
   const navigate = useNavigate();
