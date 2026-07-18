@@ -1,0 +1,69 @@
+{
+  "name": "Meeiro",
+  "type": "object",
+  "properties": {
+    "id_fazenda": {
+      "type": "string",
+      "description": "ID da fazenda (produtor_id do Produtor)"
+    },
+    "nome_produtor": {
+      "type": "string",
+      "description": "Nome do produtor vinculado"
+    },
+    "farmer_id_fk": {
+      "type": "string",
+      "description": "farmer_id_fk (chave estrangeira do produtor)"
+    },
+    "stakeholder_id": {
+      "type": "string",
+      "description": "Stakeholder ID"
+    },
+    "ms_temp_id": {
+      "type": "string",
+      "description": "ms_temp_id"
+    },
+    "nome_meeiro": {
+      "type": "string",
+      "description": "Nome do meeiro"
+    },
+    "ms_gender": {
+      "type": "string",
+      "enum": [
+        "M",
+        "F",
+        "Outro"
+      ],
+      "description": "G\u00eanero do meeiro"
+    }
+  },
+  "required": [
+    "id_fazenda",
+    "nome_meeiro"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin",
+        "profile": "gerente_sustentabilidade"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin",
+        "profile": "gerente_sustentabilidade"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin",
+        "profile": "gerente_sustentabilidade"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin",
+        "profile": "gerente_sustentabilidade"
+      }
+    }
+  }
+}

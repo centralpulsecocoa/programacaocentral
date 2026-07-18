@@ -1,0 +1,169 @@
+{
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "filial": {
+      "type": "string",
+      "description": "Filial respons\u00e1vel pelo projeto"
+    },
+    "numero_projeto": {
+      "type": "string",
+      "description": "N\u00famero do projeto (ex: Projeto 01)"
+    },
+    "projeto": {
+      "type": "string",
+      "description": "Nome do projeto"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o detalhada do projeto"
+    },
+    "prioridade": {
+      "type": "string",
+      "enum": [
+        "Baixa",
+        "M\u00e9dia",
+        "Alta",
+        "Cr\u00edtica"
+      ],
+      "default": "M\u00e9dia",
+      "description": "Prioridade do projeto"
+    },
+    "responsavel": {
+      "type": "string",
+      "description": "Nome do respons\u00e1vel pelo projeto"
+    },
+    "area": {
+      "type": "string",
+      "description": "\u00c1rea respons\u00e1vel pelo projeto"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "Macro",
+        "Subprojeto",
+        "Individual"
+      ],
+      "default": "Individual",
+      "description": "Tipo do projeto: macro (agrupa outros), subprojeto (filho de um macro) ou individual"
+    },
+    "projeto_pai_id": {
+      "type": "string",
+      "description": "ID do projeto macro pai (apenas para subprojetos)"
+    },
+    "ano_budget": {
+      "type": "number",
+      "description": "Ano do budget do projeto (ex: 2025, 2026)"
+    },
+    "valor_previsto": {
+      "type": "number",
+      "description": "Valor or\u00e7ado/previsto do projeto"
+    },
+    "valor_gasto": {
+      "type": "number",
+      "default": 0,
+      "description": "Valor total gasto at\u00e9 o momento"
+    },
+    "data_inicio_planejada": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio planejada"
+    },
+    "data_inicio_real": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio real"
+    },
+    "data_fim_planejada": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de fim planejada"
+    },
+    "data_fim_real": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de fim real"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "N\u00e3o Iniciado",
+        "Em Andamento",
+        "Pausado",
+        "Conclu\u00eddo",
+        "Cancelado"
+      ],
+      "default": "N\u00e3o Iniciado",
+      "description": "Status atual do projeto"
+    },
+    "progresso": {
+      "type": "number",
+      "default": 0,
+      "description": "Percentual de progresso (0-100)"
+    },
+    "gastos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "data": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Lista de gastos do projeto"
+    }
+  },
+  "required": [
+    "projeto",
+    "responsavel"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.responsavel": "{{user.full_name}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_originacao"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

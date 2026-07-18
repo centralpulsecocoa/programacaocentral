@@ -1,0 +1,27 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user"
+    },
+    "profile": {
+      "type": "string",
+      "description": "Perfil de acesso do usu\u00e1rio no sistema"
+    },
+    "last_login": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora do \u00faltimo login"
+    }
+  },
+  "required": [
+    "profile",
+    "last_login"
+  ]
+}

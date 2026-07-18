@@ -1,0 +1,103 @@
+{
+  "name": "MABalanca",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do registro"
+    },
+    "product": {
+      "type": "string",
+      "description": "Produto pesado"
+    },
+    "vehicle_plate": {
+      "type": "string",
+      "description": "Placa do ve\u00edculo"
+    },
+    "driver_name": {
+      "type": "string",
+      "description": "Nome do motorista"
+    },
+    "gross_weight": {
+      "type": "number",
+      "description": "Peso bruto em kg"
+    },
+    "tare_weight": {
+      "type": "number",
+      "description": "Tara em kg"
+    },
+    "net_weight": {
+      "type": "number",
+      "description": "Peso l\u00edquido em kg (calculado)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "concluido",
+        "cancelado"
+      ],
+      "default": "pendente",
+      "description": "Status do registro"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "date",
+    "product",
+    "vehicle_plate",
+    "gross_weight",
+    "tare_weight"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "op_balanca",
+            "operador",
+            "supervisor"
+          ]
+        }
+      }
+    },
+    "read": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "op_balanca",
+            "operador",
+            "supervisor",
+            "controladoria",
+            "producao",
+            "admin"
+          ]
+        }
+      }
+    },
+    "update": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "op_balanca",
+            "operador",
+            "supervisor"
+          ]
+        }
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "supervisor"
+          ]
+        }
+      }
+    }
+  }
+}

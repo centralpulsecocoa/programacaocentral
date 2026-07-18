@@ -1,0 +1,92 @@
+{
+  "name": "TecnicoSustentabilidade",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome completo do t\u00e9cnico"
+    },
+    "email": {
+      "type": "string",
+      "description": "E-mail do t\u00e9cnico"
+    },
+    "telefone": {
+      "type": "string",
+      "description": "Telefone/WhatsApp"
+    },
+    "cidade": {
+      "type": "string",
+      "description": "Cidade"
+    },
+    "estado": {
+      "type": "string",
+      "description": "Estado (UF)"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true,
+      "description": "T\u00e9cnico ativo"
+    },
+    "notas": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "nome",
+    "email"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_sustentabilidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "tecnico_agricola"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "comprador"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_sustentabilidade"
+          }
+        }
+      ]
+    }
+  }
+}

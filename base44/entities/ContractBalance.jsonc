@@ -1,0 +1,76 @@
+{
+  "name": "ContractBalance",
+  "type": "object",
+  "properties": {
+    "fornecedor": {
+      "type": "string",
+      "description": "Nome do fornecedor"
+    },
+    "centro_fornecedor": {
+      "type": "string",
+      "description": "Centro fornecedor (ex: 2080)"
+    },
+    "material": {
+      "type": "string",
+      "description": "C\u00f3digo do material SAP"
+    },
+    "quantidade": {
+      "type": "number",
+      "description": "Quantidade a ser fornecida em toneladas"
+    },
+    "documento_compras": {
+      "type": "string",
+      "description": "N\u00famero do documento de compras"
+    }
+  },
+  "required": [
+    "fornecedor",
+    "quantidade"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "admin",
+            "comprador",
+            "supervisor"
+          ]
+        }
+      }
+    },
+    "read": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "admin",
+            "comprador",
+            "supervisor",
+            "controladoria",
+            "gerente_originacao"
+          ]
+        }
+      }
+    },
+    "update": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "admin",
+            "comprador",
+            "supervisor"
+          ]
+        }
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "admin"
+          ]
+        }
+      }
+    }
+  }
+}

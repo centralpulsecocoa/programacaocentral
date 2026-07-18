@@ -1,0 +1,93 @@
+{
+  "name": "TransactionLog",
+  "type": "object",
+  "properties": {
+    "entity_type": {
+      "type": "string",
+      "description": "Tipo de entidade (Scheduling, Transfer2082, etc)"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "ID do registro afetado"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "description": "Tipo de opera\u00e7\u00e3o"
+    },
+    "data_before": {
+      "type": "object",
+      "description": "Dados antes da altera\u00e7\u00e3o (JSON)"
+    },
+    "data_after": {
+      "type": "object",
+      "description": "Dados ap\u00f3s a altera\u00e7\u00e3o (JSON)"
+    },
+    "changed_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de campos alterados"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio que fez a opera\u00e7\u00e3o"
+    },
+    "user_name": {
+      "type": "string",
+      "description": "Nome do usu\u00e1rio que fez a opera\u00e7\u00e3o"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da opera\u00e7\u00e3o"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "Endere\u00e7o IP do usu\u00e1rio"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es adicionais"
+    }
+  },
+  "required": [
+    "entity_type",
+    "entity_id",
+    "action",
+    "user_email",
+    "timestamp"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "controladoria"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "non_existent_role"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "non_existent_role"
+      }
+    }
+  }
+}

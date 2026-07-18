@@ -1,0 +1,265 @@
+{
+  "name": "FazendaChecklist",
+  "type": "object",
+  "properties": {
+    "atribuicao_id": {
+      "type": "string",
+      "description": "ID da FazendaAtribuicao (opcional)"
+    },
+    "produtor_id": {
+      "type": "string",
+      "description": "ID do Produtor"
+    },
+    "tecnico_email": {
+      "type": "string",
+      "description": "Email do t\u00e9cnico"
+    },
+    "poligono": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Pol\u00edgono"
+    },
+    "coord_geoespacial": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Coord. Geoespacial"
+    },
+    "termo_adesao": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Termo de ades\u00e3o"
+    },
+    "codigo_fornecedor": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "C\u00f3digo de fornecedor"
+    },
+    "ficha_recomendacao": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Ficha de recomenda\u00e7\u00e3o"
+    },
+    "doc_pessoal": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Doc. pessoal"
+    },
+    "doc_fazenda": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Doc. fazenda"
+    },
+    "doc_trabalhador": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Doc. Trabalhador"
+    },
+    "all_farmers": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "All farmers"
+    },
+    "cadastro_meeiros": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Cadastro de meeiros"
+    },
+    "pesquisa_anual": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Pesquisa Anual"
+    },
+    "checklist": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Checklist"
+    },
+    "asc_pesquisa": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "ASC pesquisa"
+    },
+    "clmrs_f1": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER",
+        "PERFIL FAMILIAR"
+      ],
+      "description": "CLMRS F1"
+    },
+    "clmrs_f2": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "CLMRS F2"
+    },
+    "treinamento_coaching": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Coaching and Technical Visits Treinam"
+    },
+    "treinamento_agri": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Agri Supplier Code Treinam"
+    },
+    "drive": {
+      "type": "string",
+      "enum": [
+        "FAZER",
+        "N\u00c3O FAZER"
+      ],
+      "description": "Drive"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude"
+    },
+    "reporte": {
+      "type": "string",
+      "description": "Reporte"
+    },
+    "adequacao": {
+      "type": "string",
+      "description": "Adequa\u00e7\u00e3o 30 dias (NA/Data)"
+    },
+    "observacao": {
+      "type": "string",
+      "description": "Observa\u00e7\u00e3o"
+    },
+    "responsavel_verificacao": {
+      "type": "string",
+      "description": "Respons\u00e1vel verifica\u00e7\u00e3o"
+    },
+    "data_verificacao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de verifica\u00e7\u00e3o"
+    },
+    "reporte_final": {
+      "type": "string",
+      "description": "Reporte final"
+    },
+    "observacoes_finais": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es finais"
+    },
+    "itens_feitos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de chaves dos itens marcados como feito pelo t\u00e9cnico"
+    }
+  },
+  "required": [
+    "produtor_id"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_sustentabilidade"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.tecnico_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_sustentabilidade"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.tecnico_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_sustentabilidade"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

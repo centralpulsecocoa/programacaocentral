@@ -1,0 +1,98 @@
+{
+  "name": "AppConfig",
+  "type": "object",
+  "properties": {
+    "config_type": {
+      "type": "string",
+      "enum": [
+        "warehouse",
+        "line",
+        "alert"
+      ],
+      "description": "Tipo de configura\u00e7\u00e3o"
+    },
+    "name": {
+      "type": "string",
+      "description": "Nome do item (armaz\u00e9m, linha, etc)"
+    },
+    "warehouse_ref": {
+      "type": "string",
+      "description": "Refer\u00eancia ao armaz\u00e9m (para linhas)"
+    },
+    "value": {
+      "type": "string",
+      "description": "Valor da configura\u00e7\u00e3o"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Item ativo/inativo"
+    },
+    "has_crew": {
+      "type": "boolean",
+      "default": true,
+      "description": "Linha tem terno dispon\u00edvel"
+    },
+    "max_bags": {
+      "type": "number",
+      "description": "Limite m\u00e1ximo de sacos para a linha (0 = sem limite)"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Linha vis\u00edvel no sistema (exibir/ocultar)"
+    },
+    "settings": {
+      "type": "object",
+      "description": "Configura\u00e7\u00f5es adicionais em JSON"
+    }
+  },
+  "required": [
+    "config_type",
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "operador",
+                "op_balanca",
+                "comprador",
+                "gerente_originacao",
+                "analista_qualidade",
+                "qualidade",
+                "classificador",
+                "controladoria",
+                "producao"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

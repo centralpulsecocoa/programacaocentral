@@ -1,0 +1,131 @@
+{
+  "name": "TransferDeposit",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data da transfer\u00eancia"
+    },
+    "nf": {
+      "type": "string",
+      "description": "N\u00famero da Nota Fiscal"
+    },
+    "pile_lot": {
+      "type": "string",
+      "description": "Pile/Lot"
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "BAHIA",
+        "PAR\u00c1",
+        "GHANA",
+        "MARFIM",
+        "ESPIRITO SANTO",
+        "ROND\u00d4NIA",
+        "TOCANTINS"
+      ],
+      "description": "Origem"
+    },
+    "moisture_percent": {
+      "type": "number",
+      "description": "% Moisture"
+    },
+    "ffa": {
+      "type": "number",
+      "description": "FFA"
+    },
+    "deposito": {
+      "type": "string",
+      "description": "Dep\u00f3sito"
+    },
+    "classificador": {
+      "type": "string",
+      "enum": [
+        "Andryo Borges",
+        "Vinicius Teles",
+        "Igor Moura"
+      ],
+      "description": "Classificador respons\u00e1vel"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pendente",
+        "OK"
+      ],
+      "default": "Pendente",
+      "description": "Status da transfer\u00eancia"
+    }
+  },
+  "required": [
+    "date",
+    "nf",
+    "pile_lot",
+    "origin"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "qualidade",
+                "analista_qualidade",
+                "classificador",
+                "supervisor"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "qualidade",
+                "analista_qualidade",
+                "classificador",
+                "supervisor"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

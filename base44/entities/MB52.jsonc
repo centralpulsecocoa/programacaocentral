@@ -1,0 +1,91 @@
+{
+  "name": "MB52",
+  "type": "object",
+  "properties": {
+    "material": {
+      "type": "string",
+      "description": "C\u00f3digo do material"
+    },
+    "lote": {
+      "type": "string",
+      "description": "Lote"
+    },
+    "texto_breve_material": {
+      "type": "string",
+      "description": "Texto breve do material"
+    },
+    "deposito": {
+      "type": "string",
+      "description": "Dep\u00f3sito"
+    },
+    "centro": {
+      "type": "string",
+      "description": "Centro"
+    },
+    "unidade_medida": {
+      "type": "string",
+      "description": "Unidade de medida b\u00e1sica"
+    },
+    "utilizacao_livre": {
+      "type": "number",
+      "description": "Utiliza\u00e7\u00e3o livre"
+    },
+    "em_controle_qualidade": {
+      "type": "number",
+      "description": "Em controle de qualidade"
+    },
+    "estoque_transito": {
+      "type": "number",
+      "description": "Estoque em tr\u00e2nsito"
+    },
+    "em_transfer_centro": {
+      "type": "number",
+      "description": "Em transfer\u00eancia (centro)"
+    },
+    "devolucoes": {
+      "type": "number",
+      "description": "Devolu\u00e7\u00f5es"
+    },
+    "bloqueado": {
+      "type": "number",
+      "description": "Bloqueado"
+    },
+    "estoque_nao_disponivel": {
+      "type": "number",
+      "description": "Estoque n\u00e3o dispon\u00edvel"
+    },
+    "fonte": {
+      "type": "string",
+      "enum": [
+        "upload_excel",
+        "onedrive",
+        "sharepoint"
+      ],
+      "description": "Origem dos dados"
+    },
+    "data_importacao": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da \u00faltima importa\u00e7\u00e3o"
+    }
+  },
+  "required": [
+    "material"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "controladoria"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "name": "BlendHistory",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do blend"
+    },
+    "total_quantity_mt": {
+      "type": "number",
+      "description": "Quantidade total em MT"
+    },
+    "target_ffa": {
+      "type": "number",
+      "description": "FFA alvo"
+    },
+    "calculated_ffa": {
+      "type": "number",
+      "description": "FFA calculado resultante"
+    },
+    "blend_data": {
+      "type": "object",
+      "description": "Dados completos do blend (JSON)"
+    },
+    "highest_ffa_pile": {
+      "type": "string",
+      "description": "Lote com maior FFA no blend"
+    },
+    "highest_ffa_value": {
+      "type": "number",
+      "description": "Valor do maior FFA no blend"
+    },
+    "highest_ffa_origin": {
+      "type": "string",
+      "description": "Origem do lote com maior FFA"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "date",
+    "total_quantity_mt",
+    "target_ffa",
+    "calculated_ffa"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_originacao"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "name": "IndiretosCost",
+  "type": "object",
+  "properties": {
+    "item_name": {
+      "type": "string",
+      "description": "Nome do custo fixo ou compra"
+    },
+    "filial": {
+      "type": "string",
+      "description": "Filial (ex: BA - Ilh\u00e9us)"
+    },
+    "month": {
+      "type": "string",
+      "description": "M\u00eas de refer\u00eancia (YYYY-MM)"
+    },
+    "is_custom": {
+      "type": "boolean",
+      "default": false,
+      "description": "Item customizado"
+    },
+    "origin_month": {
+      "type": "string",
+      "description": "M\u00eas de origem (rollover)"
+    },
+    "pr_number": {
+      "type": "string",
+      "description": "N\u00famero do PR (SAP)"
+    },
+    "po_number": {
+      "type": "string",
+      "description": "N\u00famero do PO (SAP)"
+    },
+    "completed_steps": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "\u00cdndices dos steps conclu\u00eddos (0=Or\u00e7amento \u2026 8=Finalizado)"
+    },
+    "step_dates": {
+      "type": "object",
+      "description": "Datas de conclus\u00e3o de cada step"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "item_name",
+    "filial",
+    "month"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "gerente_originacao",
+                "comprador"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "gerente_originacao",
+                "comprador"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "gerente_originacao",
+                "comprador"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "gerente_originacao"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

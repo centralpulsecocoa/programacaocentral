@@ -1,0 +1,313 @@
+{
+  "name": "Scheduling",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do agendamento"
+    },
+    "start_time": {
+      "type": "string",
+      "description": "Hor\u00e1rio de in\u00edcio planejado (HH:MM)"
+    },
+    "start_time_actual": {
+      "type": "string",
+      "description": "Hor\u00e1rio real de in\u00edcio da descarga (HH:MM)"
+    },
+    "arrival_time": {
+      "type": "string",
+      "description": "Hor\u00e1rio de chegada do ve\u00edculo (HH:MM)"
+    },
+    "call_time": {
+      "type": "string",
+      "description": "Hor\u00e1rio em que o ve\u00edculo foi chamado (HH:MM)"
+    },
+    "called_by": {
+      "type": "string",
+      "description": "Email do usu\u00e1rio que chamou o ve\u00edculo"
+    },
+    "end_time_predicted": {
+      "type": "string",
+      "description": "Hor\u00e1rio previsto de conclus\u00e3o (HH:MM)"
+    },
+    "end_time_actual": {
+      "type": "string",
+      "description": "Hor\u00e1rio real de conclus\u00e3o (HH:MM)"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Nome do fornecedor"
+    },
+    "quantity_bags": {
+      "type": "number",
+      "description": "Quantidade em sacos"
+    },
+    "quantity_tons": {
+      "type": "number",
+      "description": "Quantidade em toneladas (calculado: sacos * 60kg)"
+    },
+    "warehouse": {
+      "type": "string",
+      "enum": [
+        "central",
+        "fabrica",
+        "barra",
+        "ferraz"
+      ],
+      "description": "Armaz\u00e9m de descarga"
+    },
+    "line": {
+      "type": "string",
+      "description": "Linha de descarga"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "agendado",
+        "aguardando",
+        "em_descarga",
+        "concluido",
+        "cancelado"
+      ],
+      "default": "agendado",
+      "description": "Status do agendamento"
+    },
+    "contract": {
+      "type": "string",
+      "enum": [
+        "RFP",
+        "PTBF",
+        "DIF",
+        "TRANSFER\u00caNCIA"
+      ],
+      "description": "Tipo de contrato"
+    },
+    "wb_number": {
+      "type": "string",
+      "description": "N\u00famero da WB associada"
+    },
+    "load_number": {
+      "type": "string",
+      "description": "N\u00famero da carga"
+    },
+    "actual_bags": {
+      "type": "number",
+      "description": "Quantidade real de sacos descarregados"
+    },
+    "tracking_code": {
+      "type": "string",
+      "description": "C\u00f3digo de rastreio da carga"
+    },
+    "eudr_cvn": {
+      "type": "string",
+      "enum": [
+        "EUDR",
+        "CVN"
+      ],
+      "description": "Tipo de certifica\u00e7\u00e3o"
+    },
+    "apanha_status": {
+      "type": "string",
+      "enum": [
+        "Apanha",
+        "NA"
+      ],
+      "description": "Status de apanha"
+    },
+    "vehicle_plate": {
+      "type": "string",
+      "description": "Placa do ve\u00edculo"
+    },
+    "driver_name": {
+      "type": "string",
+      "description": "Nome do motorista"
+    },
+    "driver_phone": {
+      "type": "string",
+      "description": "Telefone do motorista"
+    },
+    "invoice_number": {
+      "type": "string",
+      "description": "N\u00famero da nota fiscal"
+    },
+    "gross_weight": {
+      "type": "number",
+      "description": "Peso bruto em kg"
+    },
+    "tare_weight": {
+      "type": "number",
+      "description": "Peso tara em kg"
+    },
+    "net_weight": {
+      "type": "number",
+      "description": "Peso l\u00edquido em kg (calculado: bruto - tara)"
+    },
+    "net_weight_without_bags": {
+      "type": "number",
+      "description": "Peso l\u00edquido sem sacaria em kg"
+    },
+    "origin_weight": {
+      "type": "number",
+      "description": "Peso informado na origem (apenas transfer\u00eancias do Par\u00e1)"
+    },
+    "balancinha": {
+      "type": "string",
+      "description": "Peso da balancinha"
+    },
+    "amostragem": {
+      "type": "string",
+      "description": "Res\u00edduos Recebidos - Amostragem"
+    },
+    "duplo": {
+      "type": "string",
+      "description": "Res\u00edduos Recebidos - Duplo"
+    },
+    "nibs": {
+      "type": "string",
+      "description": "Res\u00edduos Recebidos - Nibs"
+    },
+    "po": {
+      "type": "string",
+      "description": "Res\u00edduos Recebidos - P\u00f3"
+    },
+    "amostragem_devolvida": {
+      "type": "string",
+      "description": "Res\u00edduos Devolvidos - Amostragem (informativo)"
+    },
+    "duplo_devolvido": {
+      "type": "string",
+      "description": "Res\u00edduos Devolvidos - Duplo (informativo)"
+    },
+    "nibs_devolvido": {
+      "type": "string",
+      "description": "Res\u00edduos Devolvidos - Nibs (informativo)"
+    },
+    "po_devolvido": {
+      "type": "string",
+      "description": "Res\u00edduos Devolvidos - P\u00f3 (informativo)"
+    },
+    "batch": {
+      "type": "string",
+      "description": "Lote da carga"
+    },
+    "batches": {
+      "type": "string",
+      "description": "Lista de lotes em JSON (controle de lotes pelo operador)"
+    },
+    "gr": {
+      "type": "string",
+      "description": "GR (Guia de Recebimento)"
+    },
+    "release_status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "aguardando_liberacao",
+        "liberado"
+      ],
+      "default": "pendente",
+      "description": "Status de libera\u00e7\u00e3o da carga"
+    },
+    "release_requested_by": {
+      "type": "string",
+      "description": "Email do supervisor que solicitou libera\u00e7\u00e3o"
+    },
+    "release_requested_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da solicita\u00e7\u00e3o de libera\u00e7\u00e3o"
+    },
+    "released_by": {
+      "type": "string",
+      "description": "Email do analista que liberou"
+    },
+    "released_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da libera\u00e7\u00e3o"
+    },
+    "created_by_name": {
+      "type": "string",
+      "description": "Nome de quem criou/agendou o registro"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "date",
+    "start_time",
+    "supplier",
+    "quantity_bags",
+    "warehouse",
+    "line"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "comprador",
+                "gerente_originacao"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "operador",
+                "op_balanca",
+                "analista_qualidade",
+                "qualidade",
+                "gerente_originacao",
+                "comprador",
+                "classificador"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

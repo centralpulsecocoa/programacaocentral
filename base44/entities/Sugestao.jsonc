@@ -1,0 +1,119 @@
+{
+  "name": "Sugestao",
+  "type": "object",
+  "properties": {
+    "nome": {
+      "type": "string",
+      "description": "Nome do requisitante"
+    },
+    "departamento": {
+      "type": "string",
+      "description": "Departamento do requisitante"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "Sugest\u00e3o",
+        "Ideia",
+        "Requerimento"
+      ],
+      "description": "Tipo de submiss\u00e3o"
+    },
+    "tipo_requerimento": {
+      "type": "string",
+      "enum": [
+        "Melhoria",
+        "Desenvolvimento"
+      ],
+      "description": "Natureza do requerimento (Melhoria ou Desenvolvimento)"
+    },
+    "nome_projeto": {
+      "type": "string",
+      "description": "Nome do projeto (para requerimentos)"
+    },
+    "descricao": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o da sugest\u00e3o, ideia ou requerimento"
+    },
+    "objetivo": {
+      "type": "string",
+      "description": "Objetivo do requerimento/ideia/sugest\u00e3o"
+    },
+    "impacto": {
+      "type": "string",
+      "description": "Impacto/Benef\u00edcios esperados"
+    },
+    "prioridade": {
+      "type": "number",
+      "description": "Ordem de prioridade (01 = mais priorit\u00e1rio)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aguardando",
+        "em_analise",
+        "em_execucao",
+        "concluido"
+      ],
+      "default": "aguardando",
+      "description": "Status da submiss\u00e3o"
+    },
+    "prazo_estimado_dias": {
+      "type": "number",
+      "description": "Prazo estimado em dias (definido pelo admin)"
+    },
+    "criticidade": {
+      "type": "string",
+      "enum": [
+        "baixa",
+        "media",
+        "alta"
+      ],
+      "description": "Criticidade: baixa (at\u00e9 15d), m\u00e9dia (15-30d), alta (>30d)"
+    },
+    "tempo_processo_atual_horas": {
+      "type": "number",
+      "description": "Tempo gasto ao ano com o processo atual (em horas)"
+    },
+    "tempo_novo_fluxo_horas": {
+      "type": "number",
+      "description": "Tempo estimado ao ano com o novo fluxo (em horas)"
+    }
+  },
+  "required": [
+    "nome",
+    "departamento",
+    "tipo",
+    "descricao"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

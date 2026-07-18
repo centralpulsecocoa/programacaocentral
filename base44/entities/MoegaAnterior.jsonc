@@ -1,0 +1,132 @@
+{
+  "name": "MoegaAnterior",
+  "type": "object",
+  "properties": {
+    "consuming_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de consumo"
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "BAHIA",
+        "PAR\u00c1",
+        "GHANA",
+        "MARFIM",
+        "ESPIRITO SANTO",
+        "ROND\u00d4NIA",
+        "TOCANTINS"
+      ],
+      "description": "Origem"
+    },
+    "ffa": {
+      "type": "number",
+      "description": "FFA"
+    },
+    "moisture_percent": {
+      "type": "number",
+      "description": "% Moisture"
+    },
+    "shell_percent": {
+      "type": "number",
+      "description": "% Shell per origin"
+    },
+    "consumo": {
+      "type": "number",
+      "description": "Consumo"
+    },
+    "sacos": {
+      "type": "string",
+      "enum": [
+        "Sacos",
+        "Big Bags"
+      ],
+      "description": "Tipo de embalagem"
+    },
+    "linha": {
+      "type": "string",
+      "description": "Linha"
+    },
+    "classificador": {
+      "type": "string",
+      "enum": [
+        "Andryo Borges",
+        "Vinicius Teles",
+        "Igor Moura"
+      ],
+      "description": "Classificador respons\u00e1vel"
+    },
+    "ffa_ponderado": {
+      "type": "number",
+      "description": "FFA Ponderado (FFA x Consumo)"
+    }
+  },
+  "required": [
+    "consuming_date",
+    "origin"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "analista_qualidade",
+                "qualidade",
+                "classificador"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "analista_qualidade",
+                "qualidade",
+                "classificador"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "analista_qualidade",
+                "qualidade",
+                "classificador"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

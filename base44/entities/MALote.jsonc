@@ -1,0 +1,133 @@
+{
+  "name": "MALote",
+  "type": "object",
+  "properties": {
+    "lote": {
+      "type": "string",
+      "description": "C\u00f3digo/nome do lote"
+    },
+    "produto": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do produto"
+    },
+    "material_sap": {
+      "type": "string",
+      "description": "C\u00f3digo do material SAP"
+    },
+    "data_entrada": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de entrada do lote"
+    },
+    "total_paletes": {
+      "type": "number",
+      "description": "Quantidade total de paletes no lote"
+    },
+    "lote_bloqueado": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indica se o lote inteiro est\u00e1 bloqueado"
+    },
+    "motivo_bloqueio_lote": {
+      "type": "string",
+      "enum": [
+        "An\u00e1lise especial",
+        "Monitoramento",
+        "Reservado para cliente",
+        "Desvio de micro",
+        "Pat\u00f3genos"
+      ],
+      "description": "Motivo do bloqueio do lote"
+    },
+    "observacao_bloqueio_lote": {
+      "type": "string",
+      "description": "Observa\u00e7\u00e3o do bloqueio do lote"
+    },
+    "cliente_reserva_lote": {
+      "type": "string",
+      "description": "Cliente para o qual o lote inteiro est\u00e1 reservado"
+    },
+    "paletes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "numero": {
+            "type": "string"
+          },
+          "bloqueado": {
+            "type": "boolean"
+          },
+          "motivo_bloqueio": {
+            "type": "string"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "cliente": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Lista de paletes com status individual"
+    },
+    "notas": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es gerais do lote"
+    }
+  },
+  "required": [
+    "lote",
+    "data_entrada"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "operador",
+            "supervisor"
+          ]
+        }
+      }
+    },
+    "read": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "operador",
+            "supervisor",
+            "op_balanca",
+            "analista_qualidade",
+            "qualidade",
+            "gerente_originacao",
+            "controladoria",
+            "producao",
+            "admin"
+          ]
+        }
+      }
+    },
+    "update": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "operador",
+            "supervisor",
+            "analista_qualidade",
+            "qualidade"
+          ]
+        }
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "profile": {
+          "$in": [
+            "supervisor"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "name": "MAExpedicao",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de expedi\u00e7\u00e3o"
+    },
+    "material_no": {
+      "type": "string",
+      "description": "Material No"
+    },
+    "sales_order_no": {
+      "type": "string",
+      "description": "Sales Order No"
+    },
+    "customer": {
+      "type": "string",
+      "description": "Cliente"
+    },
+    "short_text": {
+      "type": "string",
+      "description": "Descri\u00e7\u00e3o do produto"
+    },
+    "customer_po_no": {
+      "type": "string",
+      "description": "Customer PO No"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantidade programada (ton)"
+    },
+    "net_price": {
+      "type": "number",
+      "description": "Net Price (R$/ton)"
+    },
+    "pluto": {
+      "type": "string",
+      "description": "Pluto"
+    },
+    "delivery": {
+      "type": "string",
+      "description": "Delivery"
+    },
+    "paletizado": {
+      "type": "string",
+      "enum": [
+        "SIM",
+        "N\u00c3O"
+      ],
+      "description": "Paletizado"
+    },
+    "frete": {
+      "type": "string",
+      "enum": [
+        "CIF",
+        "FCA"
+      ],
+      "description": "Tipo de frete"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "agendado",
+        "aguardando",
+        "em_carregamento",
+        "concluido",
+        "cancelado"
+      ],
+      "default": "agendado",
+      "description": "Status da expedi\u00e7\u00e3o"
+    },
+    "arrival_time": {
+      "type": "string",
+      "description": "Hor\u00e1rio de chegada do ve\u00edculo (HH:MM)"
+    },
+    "arrived_by": {
+      "type": "string",
+      "description": "Email de quem registrou a chegada"
+    },
+    "call_time": {
+      "type": "string",
+      "description": "Hor\u00e1rio em que o ve\u00edculo foi chamado (HH:MM)"
+    },
+    "called_by": {
+      "type": "string",
+      "description": "Email do operador que chamou o ve\u00edculo"
+    },
+    "vehicle_plate": {
+      "type": "string",
+      "description": "Placa do ve\u00edculo"
+    },
+    "driver_name": {
+      "type": "string",
+      "description": "Nome do motorista"
+    },
+    "gross_weight": {
+      "type": "number",
+      "description": "Peso bruto em kg"
+    },
+    "tare_weight": {
+      "type": "number",
+      "description": "Tara em kg"
+    },
+    "net_weight": {
+      "type": "number",
+      "description": "Peso l\u00edquido em kg"
+    },
+    "batch_loaded": {
+      "type": "string",
+      "description": "Lote embarcado (legado, campo \u00fanico)"
+    },
+    "batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "batch": {
+            "type": "string"
+          },
+          "volumes": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Lista de lotes embarcados com respectivos volumes"
+    },
+    "volumes_quantity": {
+      "type": "number",
+      "description": "Quantidade total de volumes"
+    },
+    "actual_quantity": {
+      "type": "number",
+      "description": "Quantidade real expedida (ton)"
+    },
+    "quality_released": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indica se o embarque foi liberado pela Qualidade"
+    },
+    "quality_released_by": {
+      "type": "string",
+      "description": "Email do analista de qualidade que liberou o embarque"
+    },
+    "quality_released_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data/hora da libera\u00e7\u00e3o pela Qualidade"
+    },
+    "quality_release_notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es da libera\u00e7\u00e3o de qualidade"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "date",
+    "material_no"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "operador"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "comprador"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "operador"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "comprador"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "controladoria"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "producao"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_originacao"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "operador"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

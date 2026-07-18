@@ -1,0 +1,183 @@
+{
+  "name": "PileQuality",
+  "type": "object",
+  "properties": {
+    "month": {
+      "type": "string",
+      "description": "M\u00eas de refer\u00eancia (YYYY-MM)"
+    },
+    "pile_lot": {
+      "type": "string",
+      "description": "Nome da Pilha/Lote"
+    },
+    "origin": {
+      "type": "string",
+      "enum": [
+        "BAHIA",
+        "PAR\u00c1",
+        "GHANA",
+        "MARFIM",
+        "ESPIRITO SANTO",
+        "ROND\u00d4NIA",
+        "TOCANTINS"
+      ],
+      "description": "Origem do cacau"
+    },
+    "formation_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de forma\u00e7\u00e3o da pilha"
+    },
+    "formation_moisture": {
+      "type": "number",
+      "description": "% Umidade na forma\u00e7\u00e3o"
+    },
+    "formation_ffa": {
+      "type": "number",
+      "description": "FFA na forma\u00e7\u00e3o"
+    },
+    "last_test_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data do \u00faltimo teste"
+    },
+    "last_moisture": {
+      "type": "number",
+      "description": "% Umidade no \u00faltimo teste"
+    },
+    "last_ffa": {
+      "type": "number",
+      "description": "FFA no \u00faltimo teste"
+    },
+    "moisture_variation": {
+      "type": "number",
+      "description": "Varia\u00e7\u00e3o de umidade (calculado)"
+    },
+    "ffa_variation": {
+      "type": "number",
+      "description": "Varia\u00e7\u00e3o de FFA (calculado)"
+    },
+    "quantity_tons": {
+      "type": "number",
+      "description": "Quantidade inicial em toneladas"
+    },
+    "current_balance": {
+      "type": "number",
+      "default": 0,
+      "description": "Saldo atual em toneladas (estoque dispon\u00edvel)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ativa",
+        "finalizada"
+      ],
+      "default": "ativa",
+      "description": "Status da pilha"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observa\u00e7\u00f5es"
+    }
+  },
+  "required": [
+    "month",
+    "pile_lot",
+    "origin",
+    "formation_moisture",
+    "formation_ffa"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_originacao"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_originacao"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "analista_qualidade"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "gerente_originacao"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "qualidade"
+          }
+        }
+      ]
+    }
+  }
+}

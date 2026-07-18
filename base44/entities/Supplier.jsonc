@@ -1,0 +1,97 @@
+{
+  "name": "Supplier",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nome do fornecedor"
+    },
+    "contact": {
+      "type": "string",
+      "description": "Contato do fornecedor"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Fornecedor ativo"
+    },
+    "buyer_email": {
+      "type": "string",
+      "description": "Email do comprador respons\u00e1vel"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "comprador"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": {
+              "$in": [
+                "supervisor",
+                "operador",
+                "op_balanca",
+                "comprador",
+                "gerente_originacao",
+                "analista_qualidade",
+                "qualidade",
+                "controladoria",
+                "producao"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "supervisor"
+          }
+        },
+        {
+          "user_condition": {
+            "profile": "comprador"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
